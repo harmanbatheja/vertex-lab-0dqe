@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EnvGuard — save secrets before stop</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg"></div>
+  <header class="top">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"></span>
+      <div>
+        <p class="brand-name">EnvGuard</p>
+        <p class="brand-tag">Show the env file before you kill anything</p>
+      </div>
+    </div>
+    <div class="status-pill" id="ack-pill">Not saved yet</div>
+  </header>
+
+  <main>
+    <section class="hero-block">
+      <h1>Location &amp; content first.<br />Password manager next.<br />Then stop processes.</h1>
+      <p class="lede">
+        EnvGuard surfaces your <code>.env</code> path and values so you can copy them into your password manager before terminating workers.
+      </p>
+    </section>
+
+    <section class="panel" id="env-panel">
+      <div class="panel-head">
+        <h2>Env file</h2>
+        <button type="button" class="ghost" id="refresh-env">Refresh</button>
+      </div>
+      <div class="path-row">
+        <span class="label">Location</span>
+        <code id="env-path">Loading…</code>
+        <button type="button" class="ghost small" id="copy-path">Copy path</button>
+      </div>
+      <div class="meta-row" id="env-meta"></div>
+      <div class="toolbar">
+        <button type="button" class="primary" id="copy-all">Copy all for password manager</button>
+        <button type="button" class="secondary" id="ack-btn">I've saved these secrets</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Key</th><th>Value</th><th></th></tr>
+          </thead>
+          <tbody id="env-rows"></tbody>
+        </table>
+      </div>
+      <details class="raw">
+        <summary>Raw file content</summary>
+        <pre id="env-raw"></pre>
+      </details>
+    </section>
+
+    <section class="panel" id="proc-panel">
+      <div class="panel-head">
+        <h2>Processes</h2>
+        <div class="actions">
+          <button type="button" class="ghost" id="refresh-proc">Refresh</button>
+          <button type="button" class="secondary" id="spawn-btn">Start worker</button>
+        </div>
+      </div>
+      <p class="hint" id="kill-hint">Acknowledge the env file above before stopping processes.</p>
+      <ul class="proc-list" id="proc-list"></ul>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" hidden></div>
+  <script src="/app.js"></script>
+</body>
+</html>
