@@ -199,6 +199,19 @@ button:disabled {
   border-color: var(--line);
   color: var(--ink);
 }
+a.link-btn {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-family: var(--sans);
+  font-weight: 560;
+  border-radius: 0.55rem;
+  border: 1px solid var(--line);
+  padding: 0.55rem 0.9rem;
+  font-size: 0.92rem;
+  background: #fff;
+  color: var(--ink);
+}
 .ghost {
   background: transparent;
   border-color: var(--line);

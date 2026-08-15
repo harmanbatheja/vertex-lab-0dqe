@@ -97,6 +97,22 @@ const server = http.createServer(async (req, res) => {
       });
     }
 
+    if (pathname === "/api/export" && req.method === "GET") {
+      const primary = getPrimaryEnv();
+      if (!primary) return sendJson(res, 404, { error: "No env file" });
+      const body =
+        `# EnvGuard export\n# location: ${primary.path}\n# saved for password manager\n` +
+        primary.entries.map((e) => `${e.key}=${e.value}`).join("\n") +
+        "\n";
+      res.writeHead(200, {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Content-Disposition": 'attachment; filename="envguard-export.env"',
+        "Cache-Control": "no-store",
+      });
+      res.end(body);
+      return;
+    }
+
     if (pathname.startsWith("/api/env/") && req.method === "GET") {
       const name = decodeURIComponent(pathname.slice("/api/env/".length));
       const file = listEnvFiles().find((f) => f.name === name);
