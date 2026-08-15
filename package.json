@@ -1,0 +1,10 @@
+{
+  "name": "vertex-lab-0dqe",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "start": "bun src/index.js",
+    "dev": "bun --watch src/index.js"
+  }
+}
